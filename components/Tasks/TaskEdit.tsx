@@ -11,32 +11,14 @@ import { updateTask } from '@/app/actions/TaskService';
 
 function TaskEdit({ task }: { task: Tasks }) {
   const closeRef = useRef<HTMLButtonElement>(null);
-  const [data, setData] = useState({ task: task.task, description: task.description });
+  const [data, setData] = useState({ task: task.task, description: task.description, dueDate: task.dueDate });
   const [loading, setLoading] = useState(false);
+  console.log(data);
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: () => handleEdit(),
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: ['tasks'] })
-
-      const previousTasks = queryClient.getQueryData(['tasks'])
-
-      queryClient.setQueryData(['tasks'], (old: { tasks: Tasks[] }) => ({
-        tasks: old?.tasks.map((task: Tasks) => {
-          if (task.id === task.id) {
-            return { ...task, task: data.task, description: data.description }
-          }
-          return task
-        })
-      }))
-
-      return { previousTasks }
-    },
-    onError: (err, newTodo, context) => {
-      queryClient.setQueryData(['tasks'], context?.previousTasks)
-    },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     }
@@ -52,17 +34,14 @@ function TaskEdit({ task }: { task: Tasks }) {
         createdAt: task.createdAt,
         description: data.description,
         completed: task.completed,
+        dueDate: data.dueDate as string,
       };
       const result = await updateTask(taskObject);
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
       if (result.success) {
-        // artifical delay for loading anims,
         setTimeout(() => {
-          setData({ task: task.task, description: task.description });
           setLoading(false);
           closeRef.current?.click();
         }, 1000);
-
       }
       return result;
     } catch (error) {
@@ -104,7 +83,7 @@ function TaskEdit({ task }: { task: Tasks }) {
 
           <div className='flex items-center justify-between w-full mt-6 px-4 py-2'>
             <div className='flex items-center gap-2'>
-              <SelectDates />
+              <SelectDates data={data} setData={setData} />
             </div>
 
             <div className='flex items-center gap-2'>

@@ -1,21 +1,20 @@
+'use client'
 import React from "react";
 import * as Select from "@radix-ui/react-select";
 import { CheckIcon } from "@/components/ui/Icons/Check";
 import { ClockIcon } from "@/components/ui/Icons/Clock";
-import getNext20Days from "@/utils/dates";
-
+import { NewTaskForm } from "@/types/types";
+import { getNext20Days, readbleDate } from "@/utils/dates";
 
 interface SelectItemProps extends Select.SelectItemProps {
   children: React.ReactNode;
 }
 
-
-
-const SelectDates = () => {
+const SelectDates = ({ data, setData }: { data: NewTaskForm, setData: React.Dispatch<React.SetStateAction<NewTaskForm>> }) => {
   const dates = getNext20Days();
 
   return (
-    <Select.Root >
+    <Select.Root onValueChange={(value) => setData({ ...data, dueDate: value })} value={data.dueDate as string}>
       <Select.Trigger
         className="border text-gray-600 font-medium 
               tracking-tighter text-sm px-2.5 py-1 rounded-lg shadow-sm flex items-center gap-1 "
@@ -24,17 +23,18 @@ const SelectDates = () => {
         <Select.Icon className="text-violet11">
           <ClockIcon />
         </Select.Icon>
-        <Select.Value placeholder="Due Date" />
-
+        <Select.Value placeholder="Due Date">
+          {readbleDate(data.dueDate) || "Due Date"}
+        </Select.Value>
       </Select.Trigger>
-      <Select.Portal >
-        <Select.Content className="overflow-hidden z-[1000] max-h-[60px] rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
 
+      <Select.Portal>
+        <Select.Content className="overflow-hidden z-[1000] max-h-[200px] rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
           <Select.Viewport className="py-2">
             <Select.Group>
-              {dates.map((date, index) => (
-                <SelectItem key={index} value={date}>
-                  {date}
+              {dates.map((date) => (
+                <SelectItem key={date} value={date}>
+                  {readbleDate(date)}
                 </SelectItem>
               ))}
             </Select.Group>
@@ -42,7 +42,7 @@ const SelectDates = () => {
         </Select.Content>
       </Select.Portal>
     </Select.Root>
-  )
+  );
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
@@ -57,7 +57,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         ref={forwardedRef}
       >
         <Select.ItemText>{children}</Select.ItemText>
-        <Select.ItemIndicator className="absolute left-0 inline-flex w-[25px] pl-2 items-center justify-center">
+        <Select.ItemIndicator className=" text-black">
           <CheckIcon />
         </Select.ItemIndicator>
       </Select.Item>
@@ -66,6 +66,5 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 );
 
 SelectItem.displayName = 'SelectItem';
-
 
 export default SelectDates;

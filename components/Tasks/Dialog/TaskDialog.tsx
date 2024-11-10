@@ -2,7 +2,7 @@
 import { createTask } from '@/app/actions/TaskService'
 import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/Dialogs/Dialog'
 import { SquarePenIcon } from '@/components/ui/Icons/Add'
-import { Tasks } from '@/types/types'
+import { NewTaskForm, Tasks } from '@/types/types'
 import { useQueryClient } from '@tanstack/react-query'
 import { AnimatePresence, motion } from "framer-motion"
 import { useRef, useState } from 'react'
@@ -12,14 +12,15 @@ import { Loader } from '@/components/ui/Icons/Loader'
 function TaskDialog({ userId }: { userId: string | undefined }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const queryClient = useQueryClient();
-  const [data, setData] = useState({ task: '', description: '' });
+  const [data, setData] = useState<NewTaskForm>({ task: '', description: '', dueDate: '' });
   const [loading, setLoading] = useState(false);
   if (!userId) return null;
-
+  console.log(data);
 
   async function handleSubmit() {
     if (!userId) return;
     if (!data.task) return;
+    if (!data.dueDate) return;
     setLoading(true);
     try {
       const taskObject: Tasks = {
@@ -29,13 +30,13 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
         createdAt: new Date().toISOString(),
         description: data.description,
         completed: false,
+        dueDate: data.dueDate as string,
       };
       const result = await createTask(taskObject);
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       if (result.success) {
-        // artifical delay for loading anims,
         setTimeout(() => {
-          setData({ task: '', description: '' });
+          setData({ task: '', description: '', dueDate: '' });
           setLoading(false);
           closeRef.current?.click();
         }, 1000);
@@ -81,7 +82,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
 
           <div className='flex items-center justify-between w-full mt-6 px-4 py-2'>
             <div className='flex items-center gap-2'>
-              <SelectDates />
+              <SelectDates data={data} setData={setData} />
             </div>
 
             <div className='flex items-center gap-2'>

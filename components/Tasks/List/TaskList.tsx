@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import TaskDelete from '../TaskDelete';
 import CheckboxRoot from '@/components/ui/Inputs/Checkbox';
 import TaskEdit from '../TaskEdit';
+import { readbleDate } from '@/utils/dates';
 
 function TaskList({ data }: { data: Tasks[] | null | undefined }) {
   const containerVariants = {
@@ -52,6 +53,7 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
             </div>
 
             <div className="flex w-full items-center justify-end gap-6">
+              {readbleDate(task.dueDate)}
               <TaskEdit task={task} />
               <TaskDelete taskId={task.id} />
             </div>

@@ -14,6 +14,13 @@ export interface Tasks {
   user_id: string;
   completed: number | boolean;
   createdAt: string;
-  dueDate?: string;
+  dueDate: string | Date,
   description: string;
+}
+
+
+export interface NewTaskForm {
+  task: string;
+  description: string;
+  dueDate: Date | string;
 }

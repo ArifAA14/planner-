@@ -60,8 +60,8 @@ class DbService {
 
   public async createTask(task: Tasks): Promise<{ success: boolean; message?: string }> {
     const result = await turso.execute({
-      sql: `INSERT INTO tasks (id, task, user_id, createdAt, description) VALUES (?, ?, ?, ?, ?);`,
-      args: [task.id, task.task, task.user_id, task.createdAt, task.description],
+      sql: `INSERT INTO tasks (id, task, user_id, createdAt, description, dueDate) VALUES (?, ?, ?, ?, ?, ?);`,
+      args: [task.id, task.task, task.user_id, task.createdAt, task.description, task.dueDate],
     });
 
     if (result.rowsAffected === 0) {
@@ -121,8 +121,8 @@ class DbService {
 
   public async updateTask(task: Tasks): Promise<{ success: boolean; message?: string }> {
     const result = await turso.execute({
-      sql: `UPDATE Tasks SET task = ?, description = ? WHERE id = ?;`,
-      args: [task.task, task.description, task.id],
+      sql: `UPDATE Tasks SET task = ?, description = ?, dueDate = ? WHERE id = ?;`,
+      args: [task.task, task.description, task.dueDate, task.id],
     });
 
     if (result.rowsAffected === 0) {
