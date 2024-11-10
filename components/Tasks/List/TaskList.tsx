@@ -34,7 +34,7 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
           <motion.div
             className="flex w-full h-full gap-2 items-center"
             key={task.id}
-            layoutId={task.id} // Set layoutId to stabilize individual items
+            layoutId={task.id}
             variants={childVariants}
             layout
           >

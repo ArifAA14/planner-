@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <div className="font-[family-name:var(--font-geist-sans)] flex flex-col min-h-screen  
-     md:max-w-[90%] mx-auto py-6 md:px-6 relative gap-10 px-6
+     md:max-w-[90%] mx-auto py-6 md:px-6 relative gap-10 px-6 
     ">
 
       <div className=' flex w-full h-full justify-between mt-4 '>

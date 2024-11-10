@@ -45,8 +45,8 @@ class DbService {
       return null;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const userData = result.rows[0] as any;
+
+    const userData = result.rows[0] as unknown as User;
 
     return {
       id: userData.id,
@@ -67,7 +67,6 @@ class DbService {
     if (result.rowsAffected === 0) {
       return { success: false, message: "Failed to create task." };
     }
-
     return { success: true, message: "Task created successfully." };
   }
 
@@ -80,7 +79,7 @@ class DbService {
     if (result.rows.length === 0) {
       return null;
     }
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tasks = result.rows.map((row: any) => {
       return {
         id: row.id,
