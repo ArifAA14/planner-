@@ -3,6 +3,7 @@ import GuestLanding from "@/components/auth/guest-landing";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Providers from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,8 +34,10 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         {session && session.user ? (
+          <Providers>
 
-          children
+            {children}
+          </Providers>
 
         ) : (
           <GuestLanding />

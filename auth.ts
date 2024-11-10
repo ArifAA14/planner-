@@ -12,7 +12,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       credentials: {
         email: {},
         password: {},
+
       },
+
       authorize: async (credentials) => {
         try {
           if (!credentials.email || !credentials.password) {
@@ -40,6 +42,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       },
     }),
-
   ],
+  callbacks: {
+    async session({ session, token }) {
+      // Extending the session object to include user id
+      const dbService = DbService.getInstance();
+      const dbUser = await dbService.getUserByEmail(token.email);
+
+      if (dbUser) {
+        session.user.id = dbUser.id;
+      }
+
+      return session;
+    },
+  },
 });

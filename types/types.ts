@@ -12,7 +12,8 @@ export interface Tasks {
   id: string;
   task: string;
   user_id: string;
-  completed: boolean;
+  completed: number | boolean;
   createdAt: string;
-  dueDate: string;
+  dueDate?: string;
+  description: string;
 }

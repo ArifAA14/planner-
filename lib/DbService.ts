@@ -1,4 +1,4 @@
-import { User } from "@/types/types";
+import { Tasks, User } from "@/types/types";
 import { turso } from "./client";
 
 
@@ -56,6 +56,68 @@ class DbService {
       image: userData.image,
       emailVerified: userData.emailVerified,
     };
+  }
+
+  public async createTask(task: Tasks): Promise<{ success: boolean; message?: string }> {
+    const result = await turso.execute({
+      sql: `INSERT INTO tasks (id, task, user_id, createdAt, description) VALUES (?, ?, ?, ?, ?);`,
+      args: [task.id, task.task, task.user_id, task.createdAt, task.description],
+    });
+
+    if (result.rowsAffected === 0) {
+      return { success: false, message: "Failed to create task." };
+    }
+
+    return { success: true, message: "Task created successfully." };
+  }
+
+  public async getTasks(userId: string): Promise<Tasks[] | null> {
+    const result = await turso.execute({
+      sql: `SELECT * FROM tasks WHERE user_id = ?;`,
+      args: [userId],
+    });
+
+    if (result.rows.length === 0) {
+      return null;
+    }
+
+    const tasks = result.rows.map((row: any) => {
+      return {
+        id: row.id,
+        task: row.task,
+        user_id: row.user_id,
+        completed: row.completed,
+        createdAt: row.createdAt,
+        dueDate: row.dueDate,
+        description: row.description,
+      };
+    });
+
+    return tasks;
+  }
+
+  public async setTaskCompleted(taskId: string, completed: number): Promise<{ success: boolean; message?: string }> {
+    const result = await turso.execute({
+      sql: `UPDATE Tasks SET completed = ? WHERE id = ?;`,
+      args: [completed, taskId],
+    });
+
+    if (result.rowsAffected === 0) {
+      return { success: false, message: "Failed to update task." };
+    }
+    return { success: true, message: "Task updated successfully." };
+  }
+
+  public async deleteTask(taskId: string): Promise<{ success: boolean; message?: string }> {
+    const result = await turso.execute({
+      sql: `DELETE FROM Tasks WHERE id = ?;`,
+      args: [taskId],
+    });
+
+    if (result.rowsAffected === 0) {
+      return { success: false, message: "Failed to delete task." };
+    }
+    return { success: true, message: "Task deleted successfully." };
   }
 }
 
