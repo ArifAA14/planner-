@@ -28,7 +28,7 @@ function TaskDelete({ taskId }: { taskId: string }) {
   });
 
   return (
-    <div className="hover:text-red-700" onClick={() => mutation.mutate()}>
+    <div className="hover:text-red-700 text-neutral-500" onClick={() => mutation.mutate()}>
       <DeleteIcon width={24} height={24} />
     </div>
   );

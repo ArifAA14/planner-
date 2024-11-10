@@ -2,6 +2,7 @@ import { Tasks } from '@/types/types';
 import { AnimatePresence, motion } from 'framer-motion';
 import TaskDelete from '../TaskDelete';
 import CheckboxRoot from '@/components/ui/Inputs/Checkbox';
+import TaskEdit from '../TaskEdit';
 
 function TaskList({ data }: { data: Tasks[] | null | undefined }) {
   const containerVariants = {
@@ -41,7 +42,7 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
             <CheckboxRoot checked={task.completed} id={task.id} />
             <div className="flex flex-col gap-0.5 w-full">
               <h3
-                className={`text-black font-medium md:text-xl text-lg ${task.completed === 0 ? '' : 'line-through'}`}
+                className={`text-black font-medium text-lg ${task.completed === 0 ? '' : 'line-through'}`}
               >
                 {task.task}
               </h3>
@@ -50,7 +51,8 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
               </p>
             </div>
 
-            <div className="flex w-full items-end justify-end">
+            <div className="flex w-full items-center justify-end gap-6">
+              <TaskEdit task={task} />
               <TaskDelete taskId={task.id} />
             </div>
           </motion.div>

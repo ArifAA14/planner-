@@ -49,3 +49,13 @@ export async function deleteTask(taskId: string): Promise<{ success: boolean; me
   }
 }
 
+export async function updateTask(task: Tasks): Promise<{ success: boolean; message?: string }> {
+  try {
+    const dbService = DbService.getInstance();
+    await dbService.updateTask(task);
+    return { success: true, message: "Task updated successfully" };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "An unexpected error occurred" };
+  }
+}

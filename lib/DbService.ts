@@ -118,6 +118,18 @@ class DbService {
     }
     return { success: true, message: "Task deleted successfully." };
   }
+
+  public async updateTask(task: Tasks): Promise<{ success: boolean; message?: string }> {
+    const result = await turso.execute({
+      sql: `UPDATE Tasks SET task = ?, description = ? WHERE id = ?;`,
+      args: [task.task, task.description, task.id],
+    });
+
+    if (result.rowsAffected === 0) {
+      return { success: false, message: "Failed to update task." };
+    }
+    return { success: true, message: "Task updated successfully." };
+  }
 }
 
 export default DbService;
