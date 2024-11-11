@@ -1,3 +1,6 @@
+import { formatDistanceToNowStrict, isToday, isTomorrow, isPast } from 'date-fns';
+
+
 export const getNext20Days = () => {
   const dates = [];
   const today = new Date();
@@ -16,4 +19,18 @@ export const readbleDate = (date: string | Date) => {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+export function getRelativeDateLabel(dueDate: Date | string) {
+  const date = new Date(dueDate);
+
+  if (isToday(date)) {
+    return 'Today';
+  } else if (isTomorrow(date)) {
+    return 'Tomorrow';
+  } else if (isPast(date)) {
+    return `${formatDistanceToNowStrict(date)} ago`;
+  } else {
+    return `In ${formatDistanceToNowStrict(date)}`;
+  }
 }
