@@ -1,7 +1,6 @@
 import { Locale } from '@/src/i18n/config';
 import { setUserLocale } from '@/src/services/locale';
 import * as Select from "@radix-ui/react-select";
-import { CheckIcon } from '../Icons/Check';
 import { startTransition } from 'react';
 
 type Props = {
@@ -27,7 +26,7 @@ export default function LocaleSwitcherSelect({
     <div className="relative">
       <Select.Root defaultValue={defaultValue} onValueChange={onChange}>
         <Select.Trigger
-          className=" text-black font-medium outline-none
+          className=" text-white font-medium outline-none
               tracking-tighter text-sm px-4 py-2 rounded-lg  flex items-center gap-1 "
           aria-label={label}
         >
@@ -38,7 +37,7 @@ export default function LocaleSwitcherSelect({
         <Select.Portal>
           <Select.Content
             align="end"
-            className="min-w-[8rem] overflow-hidden rounded-sm bg-white py-1 shadow-md border"
+            className="min-w-[8rem] overflow-hidden rounded-md bg-white py-1 shadow-md border"
             position="popper"
           >
             <Select.Viewport>
@@ -46,14 +45,11 @@ export default function LocaleSwitcherSelect({
 
                 <Select.Item
                   key={item.value}
-                  className="flex cursor-default outline-none text-black items-center px-3 py-2 text-base data-[highlighted]:bg-slate-100"
+                  className={`relative outline-none  flex py-2 select-none items-center rounded-[3px] px-8 text-sm leading-none text-gray-600 cursor-pointer hover:text-black
+            transition-colors duration-200 ease-linear`}
                   value={item.value}
                 >
-                  <div className="mr-2 w-[1rem]">
-                    {item.value === defaultValue && (
-                      <CheckIcon />
-                    )}
-                  </div>
+
                   <span className="text-slate-900">{item.label}</span>
                 </Select.Item>
               ))}

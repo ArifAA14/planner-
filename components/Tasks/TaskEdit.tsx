@@ -9,8 +9,10 @@ import { Tasks } from '@/types/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateTask } from '@/src/app/actions/TaskService';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 function TaskEdit({ task }: { task: Tasks }) {
+  const t = useTranslations('Dialog');
   const closeRef = useRef<HTMLButtonElement>(null);
   const [data, setData] = useState({ task: task.task, description: task.description, dueDate: task.dueDate });
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,7 @@ function TaskEdit({ task }: { task: Tasks }) {
       const result = await updateTask(taskObject);
       if (result.success) {
         setTimeout(() => {
-          toast.success('Changes saved successfully');
+          toast.success(t('Task Saved'));
           setLoading(false);
           closeRef.current?.click();
         }, 1000);
@@ -63,7 +65,7 @@ function TaskEdit({ task }: { task: Tasks }) {
         >
           <div className='flex flex-col gap-0.5'>
             <input className='outline-none selection:bg-white selection:text-black placeholder:text-gray-400  w-full px-4 py-2 text-base placeholder:text-sm'
-              placeholder='Task Name Here..'
+              placeholder={t('TaskField')}
               type='text'
               required
               name='task'
@@ -72,7 +74,7 @@ function TaskEdit({ task }: { task: Tasks }) {
               onChange={(e) => setData({ ...data, task: e.target.value })}
             />
             <input className=' outline-none placeholder:text-gray-400 placeholder:text-sm w-full px-5 py-2 text-sm'
-              placeholder='Description'
+              placeholder={t('DescriptionField')}
               type='text'
               name='description'
               value={data.description}
@@ -90,7 +92,7 @@ function TaskEdit({ task }: { task: Tasks }) {
               <DialogClose className='border text-gray-600 font-medium tracking-tight text-sm px-2.5 py-1 rounded-lg shadow-sm'
                 ref={closeRef}
               >
-                Cancel
+                {t('Cancel')}
               </DialogClose>
               <button className='bg-red-700 text-white font-medium h-[30px]
               tracking-tighter text-sm px-2.5 py-1 rounded-lg shadow-sm w-[65px] text-center'
@@ -122,7 +124,7 @@ function TaskEdit({ task }: { task: Tasks }) {
                       }}
                     >
 
-                      <span className='text-sm text-center '>Save</span>
+                      <span className='text-sm text-center '>{t('Save')}</span>
                     </motion.div>
                   }
                 </AnimatePresence>

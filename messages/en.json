@@ -19,5 +19,23 @@
     "Password": "Password",
     "PasswordMessage": "Password must be at least 8 characters long",
     "BottomMessage": "Already have an account? Login"
+  },
+  "HomePage": {
+    "Title": "Good Evening, {name}",
+    "Subtitle": "It's",
+    "ListDefault": "All"
+  },
+  "Dialog": {
+    "TaskField": "Task Name Here..",
+    "DescriptionField": "Description",
+    "DueDateField": "Due Date",
+    "AddTask": "Add Task",
+    "Cancel": "Cancel",
+    "Save": "Save",
+    "TaskName Errorfield": "Task name is required",
+    "DueDate Errorfield": "Due date is required",
+    "Task Success": "Task created successfully",
+    "Task Error": "Something went wrong",
+    "Task Saved": "Changes saved successfully"
   }
 }

@@ -5,6 +5,7 @@ import { CheckIcon } from "@/components/ui/Icons/Check";
 import { ClockIcon } from "@/components/ui/Icons/Clock";
 import { NewTaskForm } from "@/types/types";
 import { getNext20Days, readbleDate } from "@/utils/dates";
+import { useTranslations } from "next-intl";
 
 interface SelectItemProps extends Select.SelectItemProps {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ interface SelectItemProps extends Select.SelectItemProps {
 
 const SelectDates = ({ data, setData }: { data: NewTaskForm, setData: React.Dispatch<React.SetStateAction<NewTaskForm>> }) => {
   const dates = getNext20Days();
+  const t = useTranslations('Dialog');
 
   return (
     <Select.Root onValueChange={(value) => setData({ ...data, dueDate: value })} value={data.dueDate as string}>
@@ -23,8 +25,8 @@ const SelectDates = ({ data, setData }: { data: NewTaskForm, setData: React.Disp
         <Select.Icon className="text-violet11">
           <ClockIcon />
         </Select.Icon>
-        <Select.Value placeholder="Due Date">
-          {readbleDate(data.dueDate) || "Due Date"}
+        <Select.Value placeholder={t('DueDateField')}>
+          {readbleDate(data.dueDate) || t('DueDateField')}
         </Select.Value>
       </Select.Trigger>
 

@@ -19,5 +19,23 @@
     "Password": "كلمة المرور",
     "PasswordMessage": "يجب ألا يقل طول كلمة المرور عن 8 أحرف",
     "BottomMessage": "هل لديك حساب بالفعل؟ تسجيل الدخول"
-  }
+  },
+  "HomePage": {
+    "Title": "{name}, مساء الخير",
+    "Subtitle": "إنه",
+    "ListDefault": "الكل"
+  },
+  "Dialog": {
+    "TaskField": "اسم المهمة هنا..",
+    "DescriptionField": "الوصف",
+    "DueDateField": "تاريخ الاستحقاق",
+    "AddTask": "إضافة مهمة",
+    "Cancel": "إلغاء",
+    "Save": "الحفظ",
+    "TaskName Errorfield": "اسم المهمة مطلوب",
+    "DueDate Errorfield": " الاستحقاق مطلوب",
+    "Task Success": "تم إنشاء المهمة بنجاح",
+    "Task Error": "حدث خطأ ما",
+    "Task Saved": "تم حفظ التغييرات بنجاح"
+    }
 }

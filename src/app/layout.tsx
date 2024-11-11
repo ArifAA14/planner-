@@ -35,9 +35,10 @@ export default async function RootLayout({
 
   const messages = await getMessages();
 
+  // not changing the dir of the html to rtl, for simplicity.
 
   return (
-    <html lang={locale ? locale : 'en'}>
+    <html lang={locale ? locale : 'en'} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-red-700 selection:text-white `}
       >

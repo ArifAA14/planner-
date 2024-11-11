@@ -22,7 +22,6 @@ function Tasks({ session }: { session: Session | null }) {
   if (data?.tasks?.length === 0) return <div>No tasks found</div>;
 
   const filteredTasks = data?.tasks?.filter(task => task.dueDate.toString().split('T')[0] === selectedDate);
-  console.log(filteredTasks);
 
 
   return (

@@ -11,8 +11,10 @@ function GuestLanding() {
   return (
     <div className='w-full h-full min-h-screen  grid md:grid-cols-2  overflow-hidden   '>
 
-      <div className='w-full h-full bg-red-700 px-10 py-10 flex flex-col gap-4 items-center justify-center'>
-
+      <div className='w-full h-full bg-red-700 px-10 py-10 flex flex-col gap-4 items-center justify-center relative'>
+        <div className='absolute left-4 top-6'>
+          <LocaleSwitcher />
+        </div>
 
         <motion.h1
           className="text-[rgba(0,0,0,48%)] font-bold italic md:text-7xl font-serif tracking-tight"
@@ -33,9 +35,7 @@ function GuestLanding() {
 
 
       <div className='w-full h-full relative'>
-        <div className='absolute right-4 top-6'>
-          <LocaleSwitcher />
-        </div>
+
       <AnimatePresence mode='wait'>
 
         {formSelected === 'register' ? <RegisterComponent setFormSelected={setFormSelected} /> : <LoginComponent setFormSelected={setFormSelected} />}

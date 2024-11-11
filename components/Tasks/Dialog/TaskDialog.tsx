@@ -9,8 +9,10 @@ import { useRef, useState } from 'react'
 import SelectDates from '../Due/DueSelect'
 import { Loader } from '@/components/ui/Icons/Loader'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
 
 function TaskDialog({ userId }: { userId: string | undefined }) {
+  const t = useTranslations('Dialog');
   const closeRef = useRef<HTMLButtonElement>(null);
   const queryClient = useQueryClient();
   const [data, setData] = useState<NewTaskForm>({ task: '', description: '', dueDate: '' });
@@ -18,8 +20,8 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
   if (!userId) return null;
   async function handleSubmit() {
     if (!userId) return;
-    if (!data.task) return toast.error('Task name is required');
-    if (!data.dueDate) return toast.error('Due date is required');
+    if (!data.task) return toast.error(t('TaskName Errorfield'));
+    if (!data.dueDate) return toast.error(t('DueDate Errorfield'));
     setLoading(true);
     try {
       const taskObject: Tasks = {
@@ -35,7 +37,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       if (result.success) {
         setTimeout(() => {
-          toast.success('Task created successfully');
+          toast.success(t('Task Success'));
           setData({ task: '', description: '', dueDate: '' });
           setLoading(false);
           closeRef.current?.click();
@@ -44,7 +46,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
       }
     } catch (error) {
       console.log(error);
-      toast.error('Something went wrong');
+      toast.error(t('Task Error'));
     }
   };
 
@@ -64,7 +66,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
         >
           <div className='flex flex-col gap-0.5'>
             <input className='outline-none placeholder:text-gray-400  w-full px-4 py-2 text-base placeholder:text-sm'
-              placeholder='Task Name Here..'
+              placeholder={t('TaskField')}
               type='text'
               required
               name='task'
@@ -72,7 +74,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
               onChange={(e) => setData({ ...data, task: e.target.value })}
             />
             <input className=' outline-none placeholder:text-gray-400 placeholder:text-sm w-full px-5 py-2 text-sm'
-              placeholder='Description'
+              placeholder={t('DescriptionField')}
               type='text'
               name='description'
               value={data.description}
@@ -90,7 +92,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
               <DialogClose className='border text-gray-600 font-medium tracking-tight text-sm px-2.5 py-1 rounded-lg shadow-sm'
                 ref={closeRef}
               >
-                Cancel
+                {t('Cancel')}
               </DialogClose>
               <button className='bg-red-700 text-white font-medium h-[30px]
               tracking-tighter text-sm px-2.5 py-1 rounded-lg shadow-sm w-[80px] text-center'
@@ -122,7 +124,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
                       }}
                     >
 
-                      <span className='text-sm text-center '>Add Task</span>
+                      <span className='text-sm text-center '>{t('AddTask')}</span>
                     </motion.div>
                   }
                 </AnimatePresence>
