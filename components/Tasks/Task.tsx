@@ -3,11 +3,13 @@ import { getTasks } from '@/app/actions/TaskService';
 import { Loader } from '@/components/ui/Icons/Loader';
 import { useQuery } from '@tanstack/react-query';
 import { Session } from 'next-auth';
+import TaskDatePicker from './Date/TaskDatePicker';
 import TaskList from './List/TaskList';
-import { getRelativeDateLabel } from '@/utils/dates';
+import { useState } from 'react';
 
 function Tasks({ session }: { session: Session | null }) {
   const userId = session?.user?.id;
+  const [selectedDate, setSelectedDate] = useState<string>('');
   const { data, isLoading, error } = useQuery({
     queryKey: ['tasks'],
     queryFn: () => getTasks(userId as string),
@@ -19,22 +21,14 @@ function Tasks({ session }: { session: Session | null }) {
   if (error) return <div>Error: {error.message}</div>;
   if (data?.tasks?.length === 0) return <div>No tasks found</div>;
 
+  const filteredTasks = data?.tasks?.filter(task => task.dueDate.toString().split('T')[0] === selectedDate);
+  console.log(filteredTasks);
+
 
   return (
     <div className='flex w-full flex-col gap-10 h-full mt-6 px-0' >
-      <div className='flex items-center gap-3'>
-        <h2 className="text-black font-normal text-lg">
-          {getRelativeDateLabel(new Date())}
-        </h2>
-        <div className='bg-neutral-100 border py-0.5 px-4 rounded-xl '>
-          <h2 className="text-black font-normal text-lg">
-            {data?.tasks?.length}
-          </h2>
-        </div>
-      </div>
-
-
-      <TaskList data={data?.tasks} />
+      <TaskDatePicker data={data?.tasks} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <TaskList data={filteredTasks && filteredTasks.length > 0 ? filteredTasks : data?.tasks} />
     </div>
   )
 }

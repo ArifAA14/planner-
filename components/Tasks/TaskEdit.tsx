@@ -14,8 +14,6 @@ function TaskEdit({ task }: { task: Tasks }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const [data, setData] = useState({ task: task.task, description: task.description, dueDate: task.dueDate });
   const [loading, setLoading] = useState(false);
-  console.log(data);
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation({

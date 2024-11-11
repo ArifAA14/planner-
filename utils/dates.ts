@@ -8,7 +8,12 @@ export const getNext20Days = () => {
   for (let i = 0; i < 20; i++) {
     const currentDate = new Date(today);
     currentDate.setDate(today.getDate() + i);
-    dates.push(currentDate.toISOString());
+
+    // Get the date in YYYY-MM-DD format and explicitly set to noon UTC
+    const dateString = currentDate.toISOString().split('T')[0];
+    const utcDate = new Date(`${dateString}T12:00:00.000Z`);
+
+    dates.push(utcDate.toISOString());
   }
   return dates;
 };
