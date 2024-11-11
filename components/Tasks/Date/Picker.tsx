@@ -1,6 +1,5 @@
 'use client'
 import { CheckIcon } from "@/components/ui/Icons/Check";
-import { ClockIcon } from "@/components/ui/Icons/Clock";
 import { readbleDate } from "@/utils/dates";
 import * as Select from "@radix-ui/react-select";
 import React from "react";
@@ -14,20 +13,20 @@ const DayPicker = ({ days, selectedDate, setSelectedDate }: { days: string[], se
   return (
     <Select.Root defaultValue={'Today'} onValueChange={(value) => setSelectedDate(value)}>
       <Select.Trigger
-        className=" text-black font-medium outline-none
-              tracking-tighter text-lg px-2.5 py-2 flex items-center gap-1 "
+        className=" text-black font-medium outline-none  rounded-xl 
+              tracking-tighter text-lg px-4 py-2 flex items-center gap-2 "
         aria-label="Due Date"
       >
-        <Select.Icon className="text-violet11">
-          <ClockIcon />
+        <Select.Icon className="text-red-700 text-xs">
+
         </Select.Icon>
         <Select.Value placeholder="Today">
-          {selectedDate ? readbleDate(selectedDate) : 'Today'}
+          {selectedDate ? readbleDate(selectedDate) : 'All'}
         </Select.Value>
       </Select.Trigger>
 
       <Select.Portal>
-        <Select.Content className="overflow-hidden z-[1000] max-h-[200px] rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+        <Select.Content className="overflow-hidden z-[1000]  max-h-[200px] rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
           <Select.Viewport className="py-2">
             <Select.Group>
               {days.map((date) => (
@@ -49,7 +48,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
       <Select.Item
         className={
           `relative flex py-2 select-none items-center rounded-[3px] px-8 text-sm leading-none text-gray-600 cursor-pointer hover:text-black
-            transition-colors duration-200 ease-linear
+            transition-colors duration-200 ease-linear outline-none
           `}
         {...props}
         ref={forwardedRef}
