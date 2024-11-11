@@ -18,8 +18,8 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
   if (!userId) return null;
   async function handleSubmit() {
     if (!userId) return;
-    if (!data.task) return;
-    if (!data.dueDate) return;
+    if (!data.task) return toast.error('Task name is required');
+    if (!data.dueDate) return toast.error('Due date is required');
     setLoading(true);
     try {
       const taskObject: Tasks = {
@@ -44,6 +44,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
       }
     } catch (error) {
       console.log(error);
+      toast.error('Something went wrong');
     }
   };
 

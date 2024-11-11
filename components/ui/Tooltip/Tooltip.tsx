@@ -28,7 +28,7 @@ export function Tooltip({
           {children}
         </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content side="top" align="center" {...props}
-          className="bg-white border drop-shadow px-4 py-2 rounded-md
+          className="bg-white border drop-shadow px-4 py-2 rounded-md text-xs
           will-change-[transform,opacity] transition-[opacity,transform]
           data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade
           "

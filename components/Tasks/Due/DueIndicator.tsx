@@ -1,8 +1,9 @@
 import { Tooltip } from '@/components/ui/Tooltip/Tooltip';
 import { getRelativeDateLabel } from '@/utils/dates'
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react'
 
-function DueIndicator({ dueDate }: { dueDate: Date | string }) {
+function DueIndicator({ dueDate, completed }: { dueDate: Date | string, completed: number | boolean }) {
 
   function generateIndicatorColor(dateString: string) {
     switch (dateString) {
@@ -28,10 +29,17 @@ function DueIndicator({ dueDate }: { dueDate: Date | string }) {
 
   return (
     <Tooltip content={dateForTooltip}>
-      <button className={`font-medium ${generateIndicatorColor(getRelativeDateLabel(dueDate))}
-     tracking-tight text-xs py-2 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`}>
-        {getRelativeDateLabel(dueDate)}
-      </button>
+      {completed === 0 ?
+        <button className={`font-medium ${generateIndicatorColor(getRelativeDateLabel(dueDate))}
+       tracking-tight text-xs py-2 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`}
+          id='due-indicator-due'>
+          Due {getRelativeDateLabel(dueDate)}
+        </button> :
+        <button className={`font-medium bg-green-600 text-green-50
+       tracking-tight text-xs py-2 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`} >
+          Completed {getRelativeDateLabel(dueDate)}
+        </button>}
+
     </Tooltip>
   )
 }
