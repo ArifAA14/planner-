@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { SignOut } from "@/components/auth/signout-button";
 import Header from "@/components/Header/Header";
 import Tasks from "@/components/Tasks/Task";
+import LocaleSwitcher from "@/components/ui/Language/LocaleSwitcher";
 import Logo from "@/components/ui/Logo/Logo";
 
 
@@ -16,7 +17,10 @@ export default async function Home() {
 
       <div className=' flex w-full h-full justify-between mt-4 '>
         <Logo color="rgb(185 28 28)" />
-        <SignOut />
+        <div className="flex gap-6 items-center">
+          <LocaleSwitcher />
+          <SignOut />
+        </div>
       </div>
 
 

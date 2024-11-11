@@ -1,0 +1,23 @@
+{
+  "LocaleSwitcher": {
+    "ar": "Arabic",
+    "en": "English",
+    "label": "Language"
+  },
+  "LoginPage": {
+    "Title": "تسجيل الدخول",
+    "Subtitle": "سجّل الدخول إلى حسابك لمتابعة رحلتك",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "BottomMessage": "ليس لديك حساب؟ تسجيل"
+  },
+  "RegisterPage": {
+    "Title": "التسجيل",
+    "Subtitle": "سجّل للحصول على حساب مجاني لبدء رحلتك",
+    "FullName": "الاسم الكامل",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "PasswordMessage": "يجب ألا يقل طول كلمة المرور عن 8 أحرف",
+    "BottomMessage": "هل لديك حساب بالفعل؟ تسجيل الدخول"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "LocaleSwitcher": {
+    "ar": "Arabic",
+    "en": "English",
+    "label": "Language"
+  },
+  "LoginPage": {
+    "Title": "Login",
+    "Subtitle": "Login to your account to continue your journey",
+    "Email": "email address",
+    "Password": "password",
+    "BottomMessage": "Don't have an account? Register"
+  },
+  "RegisterPage": {
+    "Title": "Register",
+    "Subtitle": "Register for a free account to start your journey",
+    "FullName": "Full Name",
+    "Email": "Email Address",
+    "Password": "Password",
+    "PasswordMessage": "Password must be at least 8 characters long",
+    "BottomMessage": "Already have an account? Login"
+  }
+}

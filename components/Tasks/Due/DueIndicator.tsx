@@ -11,10 +11,8 @@ function DueIndicator({ dueDate, completed }: { dueDate: Date | string, complete
         return 'bg-yellow-50 text-yellow-700';
       case 'In 2 days':
         return 'bg-orange-50 text-orange-700';
-      case 'In 3 days':
-        return 'bg-green-50 text-green-700';
       default:
-        return 'bg-green-50 text-green-700';
+        return 'bg-neutral-50 text-neutral-800';
     }
   }
 

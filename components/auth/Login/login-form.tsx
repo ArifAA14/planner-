@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/Inputs/Input'
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useOptimistic, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface StateMessage {
   message: string;
@@ -20,7 +21,10 @@ function LoginForm() {
   const [optimisticMessages, addOptimisticMessage] = useOptimistic<
     StateMessage[],
     string
-  >(message, (state, newMessage) => [...state, { message: newMessage }])
+    >(message, (state, newMessage) => [...state, { message: newMessage }])
+
+  const t = useTranslations('LoginPage');
+
 
 
   const handleSubmit = async (formData: FormData) => {
@@ -40,19 +44,14 @@ function LoginForm() {
 
   return (
     <form action={handleSubmit} className=' w-full flex flex-col gap-5 h-full'>
-
-      {optimisticMessages.map((m, i) => (
-        <div key={i}>{m.message}</div>
-      ))}
-
       <div className='flex flex-col gap-1 '>
         <label htmlFor='email' className='px-2 font-light text-gray-500 text-sm lowercase'>
-          Email Address
+          {t('Email')}
         </label>
         <Input
           id='email'
           name='email'
-          placeholder='Email'
+          placeholder={t('Email')}
           required
           type='email'
         />
@@ -60,12 +59,12 @@ function LoginForm() {
 
       <div className='flex flex-col gap-1 '>
         <label htmlFor='name' className='px-2 font-light text-gray-500 text-sm lowercase'>
-          Password
+          {t('Password')}
         </label>
         <Input
           id='password'
           name='password'
-          placeholder='Password'
+          placeholder={t('Password')}
           required
           type='password'
         />
@@ -105,7 +104,7 @@ function LoginForm() {
               }}
             >
 
-              <span className='text-sm text-center '>Login</span>
+              <span className='text-sm text-center '>{t('Title')}</span>
             </motion.div>
           }
         </AnimatePresence>

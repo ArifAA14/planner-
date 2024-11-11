@@ -5,6 +5,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Providers from "./providers";
 import { Toaster } from 'sonner'
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from 'next-intl';
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,12 +31,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth()
+  const locale = await getLocale();
+
+  const messages = await getMessages();
+
 
   return (
-    <html lang="en">
+    <html lang={locale ? locale : 'en'}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-red-700 selection:text-white `}
       >
+        <NextIntlClientProvider messages={messages}>
         <Toaster />
         {session && session.user ? (
           <Providers>
@@ -43,7 +51,8 @@ export default async function RootLayout({
 
         ) : (
           <GuestLanding />
-        )}
+          )}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
