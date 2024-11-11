@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Loader } from '../ui/Icons/Loader';
 import { Tasks } from '@/types/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateTask } from '@/app/actions/TaskService';
+import { updateTask } from '@/src/app/actions/TaskService';
 import { toast } from 'sonner';
 
 function TaskEdit({ task }: { task: Tasks }) {

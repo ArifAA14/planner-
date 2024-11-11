@@ -1,4 +1,4 @@
-import { registerUser } from '@/app/actions/register'
+import { registerUser } from '@/src/app/actions/register'
 import React from 'react'
 import { Input } from '../../ui/Inputs/Input'
 

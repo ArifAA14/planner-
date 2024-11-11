@@ -1,7 +1,7 @@
 import React from "react";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CheckIcon } from "../Icons/Check";
-import { setTaskCompleted } from "@/app/actions/TaskService";
+import { setTaskCompleted } from "@/src/app/actions/TaskService";
 import { useQueryClient } from "@tanstack/react-query";
 
 function CheckboxRoot({ checked, id }: { checked: number | boolean, id: string }) {

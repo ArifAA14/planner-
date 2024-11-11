@@ -1,6 +1,6 @@
 import { DeleteIcon } from '../ui/Icons/Delete';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTask } from '@/app/actions/TaskService';
+import { deleteTask } from '@/src/app/actions/TaskService';
 import { Tasks } from '@/types/types';
 import { toast } from 'sonner';
 

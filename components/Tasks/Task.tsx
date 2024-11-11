@@ -1,5 +1,5 @@
 'use client';
-import { getTasks } from '@/app/actions/TaskService';
+import { getTasks } from '@/src/app/actions/TaskService';
 import { Loader } from '@/components/ui/Icons/Loader';
 import { useQuery } from '@tanstack/react-query';
 import { Session } from 'next-auth';

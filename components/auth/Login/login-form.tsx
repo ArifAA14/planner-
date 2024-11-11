@@ -1,5 +1,5 @@
 'use client'
-import { signinUser } from '@/app/actions/signin'
+import { signinUser } from '@/src/app/actions/signin'
 import { Loader } from '@/components/ui/Icons/Loader';
 import { Input } from '@/components/ui/Inputs/Input'
 import { AnimatePresence, motion } from 'framer-motion';
