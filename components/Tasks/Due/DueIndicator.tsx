@@ -1,7 +1,5 @@
 import { Tooltip } from '@/components/ui/Tooltip/Tooltip';
-import { getRelativeDateLabel } from '@/utils/dates'
-import { AnimatePresence, motion } from 'framer-motion';
-import React from 'react'
+import { getRelativeDateLabel } from '@/utils/dates';
 
 function DueIndicator({ dueDate, completed }: { dueDate: Date | string, completed: number | boolean }) {
 
