@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useRef, useState } from 'react'
 import SelectDates from '../Due/DueSelect'
 import { Loader } from '@/components/ui/Icons/Loader'
+import { toast } from 'sonner'
 
 function TaskDialog({ userId }: { userId: string | undefined }) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -15,8 +16,6 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
   const [data, setData] = useState<NewTaskForm>({ task: '', description: '', dueDate: '' });
   const [loading, setLoading] = useState(false);
   if (!userId) return null;
-  console.log(data);
-
   async function handleSubmit() {
     if (!userId) return;
     if (!data.task) return;
@@ -36,6 +35,7 @@ function TaskDialog({ userId }: { userId: string | undefined }) {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       if (result.success) {
         setTimeout(() => {
+          toast.success('Task created successfully');
           setData({ task: '', description: '', dueDate: '' });
           setLoading(false);
           closeRef.current?.click();

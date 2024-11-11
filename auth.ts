@@ -45,10 +45,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   callbacks: {
     async session({ session, token }) {
-      // Extending the session object to include user id
       const dbService = DbService.getInstance();
       const dbUser = await dbService.getUserByEmail(token.email);
-
+      // TODO: Extend to enable account verification through email
       if (dbUser) {
         session.user.id = dbUser.id;
       }

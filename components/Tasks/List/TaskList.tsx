@@ -1,9 +1,9 @@
+import CheckboxRoot from '@/components/ui/Inputs/Checkbox';
 import { Tasks } from '@/types/types';
 import { AnimatePresence, motion } from 'framer-motion';
+import DueIndicator from '../Due/DueIndicator';
 import TaskDelete from '../TaskDelete';
-import CheckboxRoot from '@/components/ui/Inputs/Checkbox';
 import TaskEdit from '../TaskEdit';
-import { getRelativeDateLabel } from '@/utils/dates';
 
 
 function TaskList({ data }: { data: Tasks[] | null | undefined }) {
@@ -56,9 +56,7 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
             </div>
 
             <div className="flex w-full items-center justify-end gap-6">
-              <div className='bg-red-50 border border-red-700 text-red-700 font-medium tracking-tight text-xs p-2 md:text-sm md:px-4 md:py-2 rounded-xl'>
-                {getRelativeDateLabel(task.dueDate)}
-              </div>
+              <DueIndicator dueDate={task.dueDate} />
               <TaskEdit task={task} />
               <TaskDelete taskId={task.id} />
             </div>

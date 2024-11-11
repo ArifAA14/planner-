@@ -8,6 +8,7 @@ import { Loader } from '../ui/Icons/Loader';
 import { Tasks } from '@/types/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateTask } from '@/app/actions/TaskService';
+import { toast } from 'sonner';
 
 function TaskEdit({ task }: { task: Tasks }) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -39,6 +40,7 @@ function TaskEdit({ task }: { task: Tasks }) {
       const result = await updateTask(taskObject);
       if (result.success) {
         setTimeout(() => {
+          toast.success('Changes saved successfully');
           setLoading(false);
           closeRef.current?.click();
         }, 1000);

@@ -29,7 +29,6 @@ class DbService {
     return result;
   }
 
-  // Method to retrieve a user from the database
   public async getUserByEmail(email: string | unknown): Promise<User | null> {
 
     if (typeof email !== "string") {

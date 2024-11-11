@@ -2,6 +2,7 @@ import { DeleteIcon } from '../ui/Icons/Delete';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteTask } from '@/app/actions/TaskService';
 import { Tasks } from '@/types/types';
+import { toast } from 'sonner';
 
 function TaskDelete({ taskId }: { taskId: string }) {
   const queryClient = useQueryClient();
@@ -23,6 +24,7 @@ function TaskDelete({ taskId }: { taskId: string }) {
       queryClient.setQueryData(['tasks'], context?.previousTasks)
     },
     onSettled: () => {
+      toast.success('Task deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     }
   });
