@@ -46,7 +46,7 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
             <CheckboxRoot checked={task.completed} id={task.id} />
             <div className="flex flex-col gap-0.5 w-full">
               <h3
-                className={`text-black font-medium text-base md:text-lg ${task.completed === 0 ? '' : 'line-through'}`}
+                className={`text-black font-medium text-sm max-w-[50%] md:max-w-full md:text-lg ${task.completed === 0 ? '' : 'line-through'}`}
               >
                 {task.task}
               </h3>
@@ -55,7 +55,7 @@ function TaskList({ data }: { data: Tasks[] | null | undefined }) {
               </p>
             </div>
 
-            <div className="flex w-full items-center justify-end gap-6">
+            <div className="flex w-full items-center justify-end gap-4 md:gap-6">
               <DueIndicator dueDate={task.dueDate} completed={task.completed} />
               <TaskEdit task={task} />
               <TaskDelete taskId={task.id} />

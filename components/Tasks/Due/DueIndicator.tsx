@@ -31,7 +31,7 @@ function DueIndicator({ dueDate, completed }: { dueDate: Date | string, complete
     <Tooltip content={dateForTooltip}>
       {completed === 0 ?
         <button className={`font-medium ${generateIndicatorColor(getRelativeDateLabel(dueDate))}
-       tracking-tight text-xs py-2 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`}
+       tracking-tight text-xs py-1.5 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`}
           id='due-indicator-due'>
           Due {getRelativeDateLabel(dueDate)}
         </button> :
