@@ -19,7 +19,9 @@ function Tasks({ session }: { session: Session | null }) {
   if (!userId) return null;
   if (isLoading) return <Loader width={30} height={30} />;
   if (error) return <div>Error: {error.message}</div>;
-  if (data?.tasks?.length === 0) return <div>No tasks found</div>;
+  if (!data?.tasks) return <div className='text-red-700 text-xl font-medium mt-16 text-left w-full'>
+    Nothing found here, get started by creating a task by using the button on the top right corner.
+  </div>;
 
   const filteredTasks = data?.tasks?.filter(task => task.dueDate.toString().split('T')[0] === selectedDate);
 

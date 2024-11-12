@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Features
 
-First, run the development server:
+- Authentication with AuthJS (Formerly known as NextAuth)
+- React Query for data fetching, cahching, and managment.
+- Tailwind CSS & Radix UI Primitives.
+- TypeScript throughout.
+- Framer Motion for smooth, high performance animations.
+- Date-fns for date manipulation.
+- Turbopack for faster builds.
+- Next-Intl for internationalization (Arabic & English Suported)
+- Sonner for notifications.
+- Database with SQLite powered by Turso.
+- Zod for data & schema validation.
+- Vercel for deployment.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design Choices
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- The application is built on the modern app router, utilizing the powerful React Server Components (RSC).
+- Most critical operations such as authentication, data fetching and data manipulation are handled by Server Actions, which are executed on the server always, ensuring no data leaks to the client.
+- React Query plays an important role in managing the data throughout the application, providing a simple and efficient way to fetch, mutate and cache data, provide optimisitc updates, and keeping the data always up to date.
+- LibSQL client powered by Turso.tech is used for database, this could be further replaced with a more robust ORM such as Drizzle, but for simplicity and ease of use, the libSQL client is used directly as it is never exposed to the client.
+- The application follows a strict separation of concerns, with each component responsible for its own logic and state, making it easier to maintain and test.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

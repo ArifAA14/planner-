@@ -16,15 +16,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
 
       authorize: async (credentials) => {
-        try {
+        try {          
           if (!credentials.email || !credentials.password) {
             throw new AuthError("Email and password are required.");
           }
-
           const dbService = DbService.getInstance();
           const user = await dbService.getUserByEmail(credentials.email);
-
-
           if (!user || !user.password) {
             throw new AuthError("User not found or invalid credentials.");
           }
