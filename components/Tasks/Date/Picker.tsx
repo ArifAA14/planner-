@@ -2,6 +2,7 @@
 import { CheckIcon } from "@/components/ui/Icons/Check";
 import { readbleDate } from "@/utils/dates";
 import * as Select from "@radix-ui/react-select";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 interface SelectItemProps extends Select.SelectItemProps {
@@ -9,9 +10,9 @@ interface SelectItemProps extends Select.SelectItemProps {
 }
 
 const DayPicker = ({ days, selectedDate, setSelectedDate }: { days: string[], selectedDate: string, setSelectedDate: React.Dispatch<React.SetStateAction<string>> }) => {
-
+  const t = useTranslations('TaskDatePicker');
   return (
-    <Select.Root defaultValue={'Today'} onValueChange={(value) => setSelectedDate(value)}>
+    <Select.Root defaultValue={t('All')} onValueChange={(value) => setSelectedDate(value)}>
       <Select.Trigger
         className=" text-black font-medium outline-none  rounded-xl 
               tracking-tighter text-lg px-4 py-2 flex items-center gap-2 "
@@ -21,7 +22,7 @@ const DayPicker = ({ days, selectedDate, setSelectedDate }: { days: string[], se
 
         </Select.Icon>
         <Select.Value placeholder="Today">
-          {selectedDate ? readbleDate(selectedDate) : 'All'}
+          {selectedDate ? readbleDate(selectedDate) : t('All')}
         </Select.Value>
       </Select.Trigger>
 

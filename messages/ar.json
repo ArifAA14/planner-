@@ -37,5 +37,10 @@
     "Task Success": "تم إنشاء المهمة بنجاح",
     "Task Error": "حدث خطأ ما",
     "Task Saved": "تم حفظ التغييرات بنجاح"
+    },
+    "TaskDatePicker": {
+      "All": "الكل",
+      "Show All": "عرض الكل",
+      "Completed": "المكتملة"
     }
 }

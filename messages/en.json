@@ -37,5 +37,10 @@
     "Task Success": "Task created successfully",
     "Task Error": "Something went wrong",
     "Task Saved": "Changes saved successfully"
-  }
+  },
+  "TaskDatePicker": {
+    "All": "All",
+    "Show All": "Show All",
+    "Completed": "Completed"
+    }
 }

@@ -1,9 +1,10 @@
 'use client'
 import { Tasks } from '@/types/types'
 import DayPicker from './Picker'
+import { useTranslations } from 'next-intl';
 
 function TaskDatePicker({ data, selectedDate, setSelectedDate }: { data: Tasks[] | null | undefined, selectedDate: string, setSelectedDate: React.Dispatch<React.SetStateAction<string>> }) {
-
+  const t = useTranslations('TaskDatePicker');
   const days = [...new Set(
     data?.map(task => {
       const dueDate = task.dueDate instanceof Date
@@ -30,7 +31,7 @@ function TaskDatePicker({ data, selectedDate, setSelectedDate }: { data: Tasks[]
           onClick={() => setSelectedDate('')}
         >
           <h2 className="text-red-700 font-normal text-sm">
-            Show All
+            {t('Show All')}
           </h2>
         </div>
         : null

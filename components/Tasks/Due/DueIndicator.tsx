@@ -2,8 +2,11 @@ import { Tooltip } from '@/components/ui/Tooltip/Tooltip';
 import { getRelativeDateLabel } from '@/utils/dates';
 
 function DueIndicator({ dueDate, completed }: { dueDate: Date | string, completed: number | boolean }) {
-
   function generateIndicatorColor(dateString: string) {
+    if (dateString.includes('ago')) {
+      return 'bg-red-200 text-red-800';
+    }
+
     switch (dateString) {
       case 'Today':
         return 'bg-red-50 text-red-700';
@@ -15,6 +18,7 @@ function DueIndicator({ dueDate, completed }: { dueDate: Date | string, complete
         return 'bg-neutral-50 text-neutral-800';
     }
   }
+
 
   const dateForTooltip = new Date(dueDate).toLocaleDateString('en-GB', {
     month: 'long',

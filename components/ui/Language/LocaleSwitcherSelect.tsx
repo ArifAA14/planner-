@@ -7,12 +7,14 @@ type Props = {
   defaultValue: string;
   items: Array<{ value: string; label: string }>;
   label: string;
+  textColor: string;
 };
 
 export default function LocaleSwitcherSelect({
   defaultValue,
   items,
-  label
+  label,
+  textColor
 }: Props) {
 
   function onChange(value: string) {
@@ -26,8 +28,8 @@ export default function LocaleSwitcherSelect({
     <div className="relative">
       <Select.Root defaultValue={defaultValue} onValueChange={onChange}>
         <Select.Trigger
-          className=" text-white font-medium outline-none
-              tracking-tighter text-sm px-4 py-2 rounded-lg  flex items-center gap-1 "
+          className={`${textColor} font-medium outline-none
+              tracking-tighter text-sm px-4 py-2 rounded-lg  flex items-center gap-1 `}
           aria-label={label}
         >
           <Select.Icon className='text-gray-300 mt-0.5'>

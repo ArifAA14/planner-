@@ -4,6 +4,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // hack to fix vercel deployments failure.
   webpack: (config) => {
     config.externals = [...config.externals, 'bcrypt'];
     return config;

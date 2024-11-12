@@ -18,7 +18,7 @@ export default async function Home() {
       <div className=' flex w-full h-full justify-between mt-4 '>
         <Logo color="rgb(185 28 28)" />
         <div className="flex gap-6 items-center">
-          <LocaleSwitcher />
+          <LocaleSwitcher textColor='text-black' />
           <SignOut />
         </div>
       </div>

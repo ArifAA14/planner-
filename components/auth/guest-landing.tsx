@@ -13,7 +13,7 @@ function GuestLanding() {
 
       <div className='w-full h-full bg-red-700 px-10 py-10 flex flex-col gap-4 items-center justify-center relative'>
         <div className='absolute left-4 top-6'>
-          <LocaleSwitcher />
+          <LocaleSwitcher textColor='text-white' />
         </div>
 
         <motion.h1
