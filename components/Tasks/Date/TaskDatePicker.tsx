@@ -19,24 +19,28 @@ function TaskDatePicker({ data, selectedDate, setSelectedDate }: { data: Tasks[]
   });
 
 
+
+
   return (
-    <div className='flex items-center gap-3'>
+    <div className='flex gap-4 items-center'>
       <DayPicker days={days}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate} />
 
 
       {selectedDate !== '' ?
-        <div className='bg-red-100  py-0.5 px-4 rounded-xl cursor-pointer text-red-700'
+        <div className='bg-neutral-100  py-0.5 px-4 rounded-lg border cursor-pointer text-neutral-700'
           onClick={() => setSelectedDate('')}
         >
-          <h2 className="text-red-700 font-normal text-sm">
+          <h2 className=" font-normal text-sm">
             {t('Show All')}
           </h2>
         </div>
         : null
       }
     </div>
+
+
   )
 }
 

@@ -25,10 +25,35 @@ function Tasks({ session }: { session: Session | null }) {
 
   const filteredTasks = data?.tasks?.filter(task => task.dueDate.toString().split('T')[0] === selectedDate);
 
+  const overdueTasks = data?.tasks?.filter(task => task.dueDate.toString().split('T')[0] < new Date().toISOString().split('T')[0] && !task.completed).length;
+  const completedTasks = data?.tasks?.filter(task => task.completed).length;
+  const upcomingTasks = data?.tasks?.filter(task => task.dueDate.toString().split('T')[0] > new Date().toISOString().split('T')[0]).length;
+
+
 
   return (
     <div className='flex w-full flex-col gap-10 h-full mt-6 px-0' >
-      <TaskDatePicker data={data?.tasks} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <div className='flex items-center gap-3 w-full justify-between mb-4'>
+        <TaskDatePicker data={data?.tasks} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+
+        <div className='flex items-center gap-4'>
+          <div className='bg-white border border-red-700 font-normal shadow-sm rounded-lg py-1 px-4 cursor-pointer text-red-700 text-sm'
+          >
+            Overdue ({overdueTasks})
+          </div>
+
+          <div className='bg-white border border-green-700 font-normal shadow-sm rounded-lg py-1 px-4 cursor-pointer text-green-700 text-sm'
+          >
+            Completed ({completedTasks})
+          </div>
+
+          <div className='bg-white border border-yellow-700 font-normal shadow-sm rounded-lg py-1 px-4 cursor-pointer text-yellow-700 text-sm'
+          >
+            Upcoming ({upcomingTasks})
+          </div>
+        </div>
+      </div>
+
       <TaskList data={filteredTasks && filteredTasks.length > 0 ? filteredTasks : data?.tasks} />
     </div>
   )
