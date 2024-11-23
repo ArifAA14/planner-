@@ -4,12 +4,12 @@ import { getRelativeDateLabel } from '@/utils/dates';
 function DueIndicator({ dueDate, completed }: { dueDate: Date | string, completed: number | boolean }) {
   function generateIndicatorColor(dateString: string) {
     if (dateString.includes('ago')) {
-      return 'bg-red-200 text-red-800';
+      return 'bg-red-100 text-red-800 border border-red-700 ';
     }
 
     switch (dateString) {
       case 'Today':
-        return 'bg-red-50 text-red-700';
+        return 'bg-red-50 text-red-600';
       case 'Tomorrow':
         return 'bg-yellow-50 text-yellow-700';
       case 'In 2 days':
@@ -31,14 +31,17 @@ function DueIndicator({ dueDate, completed }: { dueDate: Date | string, complete
     <Tooltip content={dateForTooltip}>
       {completed === 0 ?
         <button className={`font-medium ${generateIndicatorColor(getRelativeDateLabel(dueDate))}
-       tracking-tight text-xs py-1.5 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`}
+       tracking-tight text-xs hidden md:block  py-1.5 px-4 md:text-sm md:px-2.5 md:py-1.5 rounded-md shadow cursor-pointer`}
           id='due-indicator-due'>
           Due {getRelativeDateLabel(dueDate)}
         </button> :
-        <button className={`font-medium bg-green-600 text-green-50
-       tracking-tight text-xs py-2 px-4 md:text-sm md:px-4 md:py-2 rounded-md shadow cursor-pointer`} >
-          Completed {getRelativeDateLabel(dueDate)}
+        <button className={`font-medium bg-green-600 text-green-50 hidden md:block
+       tracking-tight text-xs py-1 px-4 md:text-sm md:px-2.5 md:py-1.5 rounded-md shadow cursor-pointer`} >
+          Done {getRelativeDateLabel(dueDate)}
         </button>}
+
+
+
 
     </Tooltip>
   )

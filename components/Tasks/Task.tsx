@@ -32,6 +32,9 @@ function Tasks({ session }: { session: Session | null }) {
       );
       setSelectedTasks(filtered.length > 0 ? filtered : data.tasks);
     }
+    if (selectedDate === '') {
+      setSelectedTasks(data?.tasks);
+    }
   }, [selectedDate, data?.tasks]);
 
   if (!userId) return null;
@@ -68,7 +71,6 @@ function Tasks({ session }: { session: Session | null }) {
           data={data?.tasks}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
-          setSelectedTasks={setSelectedTasks}
         />
 
         <div className='flex items-center gap-0 border rounded-lg px-0'>
