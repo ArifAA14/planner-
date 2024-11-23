@@ -3,7 +3,13 @@ import { Tasks } from '@/types/types'
 import DayPicker from './Picker'
 import { useTranslations } from 'next-intl';
 
-function TaskDatePicker({ data, selectedDate, setSelectedDate }: { data: Tasks[] | null | undefined, selectedDate: string, setSelectedDate: React.Dispatch<React.SetStateAction<string>> }) {
+function TaskDatePicker({ data, selectedDate, setSelectedDate, setSelectedTasks }:
+  {
+    data: Tasks[] | null | undefined, selectedDate: string,
+    setSelectedDate: React.Dispatch<React.SetStateAction<string>>,
+    setSelectedTasks: React.Dispatch<React.SetStateAction<Tasks[] | null | undefined>>
+
+  }) {
   const t = useTranslations('TaskDatePicker');
   const days = [...new Set(
     data?.map(task => {
@@ -30,7 +36,7 @@ function TaskDatePicker({ data, selectedDate, setSelectedDate }: { data: Tasks[]
 
       {selectedDate !== '' ?
         <div className='bg-neutral-100  py-0.5 px-4 rounded-lg border cursor-pointer text-neutral-700'
-          onClick={() => setSelectedDate('')}
+          onClick={() => setSelectedTasks(data)}
         >
           <h2 className=" font-normal text-sm">
             {t('Show All')}
