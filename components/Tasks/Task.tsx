@@ -73,7 +73,7 @@ function Tasks({ session }: { session: Session | null }) {
 
         <div className='flex items-center gap-0 border rounded-lg px-0'>
           <div
-            className={`font-normal border-r px-2 py-2 cursor-pointer text-red-700 text-xs
+            className={`font-normal border-r px-2 py-2 cursor-pointer text-red-700 text-xs rounded-l-lg
                 ${isArrayEqual(selectedTasks, overdueTasks) ? 'bg-red-100' : ''}
               `}
             onClick={() => handleTaskFilter(overdueTasks)}
